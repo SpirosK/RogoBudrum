@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0lt52c6vsi6i"]
+
+[ext_resource type="Script" path="res://Game/enemies/enemy_001.gd" id="1_u1sjf"]
+[ext_resource type="Texture2D" uid="uid://bmx48xntbhdd1" path="res://enemy sprites/CCBy3_JosephSeraph_Elemental_01.png" id="2_bu1c5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_71b8v"]
+size = Vector2(1, 1)
+orientation = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tnsa"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("2_bu1c5")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cj1qe"]
+data = PackedVector3Array(0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, -0.5)
+
+[sub_resource type="ImageTexture" id="ImageTexture_lkj5h"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inh31"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = SubResource("ImageTexture_lkj5h")
+albedo_texture_force_srgb = true
+
+[node name="enemy_01" type="Node3D"]
+script = ExtResource("1_u1sjf")
+
+[node name="X1a" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.424264, 0, 0.424264, 0, 0.6, 0, -0.424264, 0, -0.424264, 0, 0.284, 0)
+mesh = SubResource("PlaneMesh_71b8v")
+surface_material_override/0 = SubResource("StandardMaterial3D_7tnsa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="X1a"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="X1a/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_cj1qe")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="X1a"]
+transform = Transform3D(1.51619, 0, 0.692055, 0, 1.66667, 0, -0.692055, 0, 1.51619, -0.101421, -0.0249082, 0.104341)
+light_color = Color(0.054902, 0.67451, 1, 1)
+light_energy = 0.3
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 0.186
+height = 0.026
+material = SubResource("StandardMaterial3D_inh31")

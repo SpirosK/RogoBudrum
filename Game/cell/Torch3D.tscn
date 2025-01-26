@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl3sdfowe2jkn"]
+
+[ext_resource type="Script" path="res://Game/cell/Torch3D.gd" id="1_1nnuv"]
+
+[sub_resource type="Animation" id="Animation_uiae7"]
+resource_name = "light_dlixke"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3, 4, 6, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.6, 0.8, 0.6, 0.75, 0.45, 0.6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjvvq"]
+_data = {
+"light_dlixke": SubResource("Animation_uiae7")
+}
+
+[node name="Torch3D" type="Node3D"]
+script = ExtResource("1_1nnuv")
+
+[node name="LightAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../OmniLight3D")
+libraries = {
+"": SubResource("AnimationLibrary_gjvvq")
+}
+autoplay = "light_dlixke"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00155599, 0.101751, -1.49012e-08)
+light_color = Color(1, 0.368627, 0.184314, 1)
+light_energy = 0.6
+light_volumetric_fog_energy = 2.0
+omni_range = 4.0
+omni_attenuation = 2.5

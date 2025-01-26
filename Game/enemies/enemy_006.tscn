@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://x66xenkncw31"]
+
+[ext_resource type="Script" path="res://Game/enemies/enemy_006.gd" id="1_8ktrw"]
+[ext_resource type="Texture2D" uid="uid://dra5t0h7f1gtj" path="res://Game/enemies/sprites/PD_Tastygraph_10.png" id="2_upllx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_71b8v"]
+size = Vector2(1, 1)
+orientation = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tnsa"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("2_upllx")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cj1qe"]
+data = PackedVector3Array(0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, -0.5)
+backface_collision = true
+
+[sub_resource type="ImageTexture" id="ImageTexture_lkj5h"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inh31"]
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = SubResource("ImageTexture_lkj5h")
+albedo_texture_force_srgb = true
+
+[node name="enemy" type="CharacterBody3D"]
+script = ExtResource("1_8ktrw")
+
+[node name="X1a" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0.493019, 0)
+mesh = SubResource("PlaneMesh_71b8v")
+surface_material_override/0 = SubResource("StandardMaterial3D_7tnsa")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="X1a"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.412, 0.15, 0.05)
+light_color = Color(0.835294, 0, 0, 1)
+light_energy = 0.3
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="X1a"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.412, 0.15, 0.05)
+light_color = Color(0.835294, 0, 0, 1)
+light_energy = 0.3
+
+[node name="StaticBody3D" type="StaticBody3D" parent="X1a"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.494663, 0)
+
+[node name="Collision3D_South" type="CollisionShape3D" parent="X1a/StaticBody3D"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -0.380836, 0.409129, -0.380836)
+shape = SubResource("ConcavePolygonShape3D_cj1qe")
+
+[node name="Collision3D_North" type="CollisionShape3D" parent="X1a/StaticBody3D"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0.384305, 0.493019, 0.384305)
+shape = SubResource("ConcavePolygonShape3D_cj1qe")
+
+[node name="Collision3D_West" type="CollisionShape3D" parent="X1a/StaticBody3D"]
+transform = Transform3D(0.709952, 0, 0.70425, 0, 1, 0, -0.70425, 0, 0.709952, 0.410021, 0.986038, -0.352058)
+shape = SubResource("ConcavePolygonShape3D_cj1qe")
+
+[node name="Collision3D_East" type="CollisionShape3D" parent="X1a/StaticBody3D"]
+transform = Transform3D(0.709952, 0, 0.70425, 0, 1, 0, -0.70425, 0, 0.709952, -0.348617, 0.986038, 0.406581)
+shape = SubResource("ConcavePolygonShape3D_cj1qe")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 0.186
+height = 0.04
+material = SubResource("StandardMaterial3D_inh31")

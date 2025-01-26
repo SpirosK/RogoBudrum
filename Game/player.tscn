@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ekxxogjmxvh"]
+
+[ext_resource type="Script" path="res://Game/player.gd" id="1_5ch64"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_5ch64")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.279261)
+near = 0.001
+far = 800.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+light_energy = 0.2
+light_specular = 0.66
+distance_fade_enabled = true
+distance_fade_begin = 5.0
+distance_fade_length = 20.0
+
+[node name="Ray_front" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="Ray_back" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, 0.6, 0)
